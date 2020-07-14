@@ -1,0 +1,20 @@
+{
+  "name": "taro-extras",
+  "version": "1.0.1",
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "@tarojs/taro": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Eusen/taro-extras"
+  },
+  "author": {
+    "name": "Eusen",
+    "email": "179530591@qq.com",
+    "url": "https://github.com/Eusen"
+  },
+  "license": "Apache License",
+  "main": "index.ts",
+  "sideEffects": false
+}
