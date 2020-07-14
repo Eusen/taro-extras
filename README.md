@@ -30,7 +30,7 @@ https://github.com/NervJS/nerv/issues/163
 不过值得欣慰的是 npm 可以通过 github 链接安装：
 
 ```
-npm install git+https://github.com/Eusen/taro-extras-builds.git
+npm install git+https://github.com/Eusen/taro-extras.git
 ```
 
 
