@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "sourceMap": true,
+    "types": [
+      "@types/node",
+      "@types/react"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
