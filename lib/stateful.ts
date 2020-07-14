@@ -1,15 +1,13 @@
 import {Component} from 'react';
-import {ProxyFactory} from './proxy';
+import {ProxyFactory, readFields} from './proxy';
 
 class BaseComponent<P = any> extends Component<P, any> {
   props: P;
   state: this;
 
   setState(newState: this, callback: () => void) {
-    Object.keys(newState).forEach(key => {
-      if (typeof newState[key] !== "function") {
-        this.state[key] = key;
-      }
+    readFields(newState, (key) => {
+      this.state[key] = key;
     });
     callback && callback();
   }
