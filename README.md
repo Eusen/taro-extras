@@ -94,6 +94,8 @@ export default class IndexPage extends Stateful.Page {
 	- ProxyOnCatch: `componentDidCatch` => `onCatch`
 	- ProxyOnDestroy: `componentWillUnmount` => `onDestroy`
 
+4. 如果你在项目中使用了我，就可以把其他所有的状态管理包都删掉了哦
+
 
 ## 谁创造了我？
 
