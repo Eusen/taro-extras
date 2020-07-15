@@ -193,10 +193,10 @@ export function readFields<T = any>(instance: T, read: (key: string, instance?: 
  * @param isReplace 是否替换
  */
 export function proxyMethod(instance: any, methodName: string, newMethod: (...args: any[]) => any, isReplace = false) {
-  const replaced = instance[methodName];
   if (isReplace) {
     instance[methodName] = newMethod;
   } else {
+    const replaced = instance[methodName];
     instance[methodName] = (...args: any[]) => {
       let result = newMethod(...args);
       if (replaced) {
