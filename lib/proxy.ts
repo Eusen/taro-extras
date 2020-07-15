@@ -157,9 +157,7 @@ export function boundObjectProxy(value: any, onSet: OnSet) {
 
       value = proxyArray(value, new Proxy(value, new ObjectProxy(onSet)));
     } else {
-      Object.keys(value).forEach(key => {
-        if (EXCLUDE_KEYS.includes(key) || typeof value[key] === 'function') return;
-
+      readFields(value, (key) => {
         try {
           value[key] = boundObjectProxy(value[key], onSet);
         } catch (e) {
