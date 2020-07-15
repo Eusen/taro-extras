@@ -10,6 +10,7 @@
 # 扩展库自述
 
 ## 我是在什么情况下出生的？
+
 我的作者是一个重度 `Angular` 开发者，从 `Angular.js` 到 `Angular 10`，双向数据绑定已经在他的心中形成了一种习惯。他最近接手了一个小程序，一直对 `Taro` 比较感兴趣，正好又赶在了 `Taro3` 发布之际，所以他决定着手尝试一下。
 
 可是从 `Angular` 跳到相对陌生的 `React`，对他来说有些烫手，在尝试了 `Redux`、`MBox`、和原生的 `setState` 后，他写出了第一版自动刷新工具：
@@ -96,6 +97,7 @@ export default class IndexPage extends Stateful.Page {
 
 4. 如果你在项目中使用了我，就可以把其他所有的状态管理包都删掉了哦
 
+5. 'render', 'onInit', 'afterViewInit', 'onChanges', 'onCatch', 'onDestroy' 这几个方法可以不用 `Stateful.bind()`，因为我已经绑定过了。
 
 ## 谁创造了我？
 
