@@ -6,7 +6,6 @@
     "@tarojs/taro": "^3.0.2"
   },
   "devDependencies": {
-    "react": "^16.13.1",
     "@tarojs/taro": "^3.0.2",
     "@types/react": "^16.9.43",
     "@types/node": "^13.13.14",
