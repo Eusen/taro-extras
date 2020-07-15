@@ -25,7 +25,7 @@ export class Stateful {
   }
 
   private static Decorator = class StatefulDecorator {
-    methods: string[] = ['render', 'onInit', 'afterViewInit', 'onChanges', 'onCatch', 'onDestory'];
+    methods: string[] = ['render', 'onInit', 'afterViewInit', 'onChanges', 'onCatch', 'onDestroy'];
 
     addMethod(method: string) {
       if (!this.methods.includes(method)) {

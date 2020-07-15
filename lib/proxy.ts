@@ -2,7 +2,7 @@ import {Component, ErrorInfo} from 'react';
 import * as Taro from '@tarojs/taro';
 
 /**
- * 排除的实例
+ * 排除的实例属性
  */
 const EXCLUDE_KEYS = ['state', 'refs', 'props', 'context', 'updater', '_reactInternalFiber', '_reactInternalInstance'];
 
@@ -101,7 +101,7 @@ export class ProxyFactory {
 
     proxyMethod(component, 'componentWillUnmount', () => {
       component._isMounted = false;
-      component.onDestory && component.onDestory();
+      component.onDestroy && component.onDestroy();
     }, true);
 
     return proxy;
