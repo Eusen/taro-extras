@@ -89,8 +89,7 @@ export default class IndexPage extends Stateful.Page {
 2. 组件需要继承 `Stateful.Component`，页面需要继承 `Stateful.Page`。
 
 3. 请 `implements` 以下 `Proxy Hooks` 以替代对应的 `React Hooks`
-	- ProxyOnInit: `constructor` 没错，就是构造函数。不建议写构造，建议用 `onInit` 代替
-	- ProxyAfterViewInit: `componentDidMount` => `afterViewInit`
+	- ProxyAfterViewInit: `componentDidMount` => `afterViewInit` 推荐将数据初始化操作放在这里
 	- ProxyOnChanges: `shouldComponentUpdate` => `onChanges`
 	- ProxyOnCatch: `componentDidCatch` => `onCatch`
 	- ProxyOnDestroy: `componentWillUnmount` => `onDestroy`
