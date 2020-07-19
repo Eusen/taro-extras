@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {ProxyFactory} from './proxy';
+import {ProxyFactory, DEFAULT_INNER_METHODS} from './proxy';
 
 export class Stateful {
   /**
@@ -19,13 +19,16 @@ export class Stateful {
    */
   static bind() {
     return (instance: any, methodName: string) => {
-      const decorator = instance.constructor.decorator = new this.Decorator();
+      let decorator = instance.constructor.decorator;
+      if (!decorator) {
+        instance.constructor.decorator = decorator = new this.Decorator();
+      }
       decorator.addMethod(methodName);
     }
   }
 
   private static Decorator = class StatefulDecorator {
-    methods: string[] = ['render', 'onInit', 'afterViewInit', 'onChanges', 'onCatch', 'onDestroy'];
+    methods: string[] = DEFAULT_INNER_METHODS;
 
     addMethod(method: string) {
       if (!this.methods.includes(method)) {
@@ -72,11 +75,6 @@ export class Stateful {
     constructor(props: P) {
       super(props);
       ProxyFactory.createComponentProxy(this);
-      // 延迟初始化，让给类属性初始化时间
-      setTimeout(() => {
-        const self = this as any;
-        self.onInit && self.onInit();
-      });
     }
   };
 
@@ -117,11 +115,6 @@ export class Stateful {
     constructor(props: P) {
       super(props);
       ProxyFactory.createPageProxy(this);
-      // 延迟初始化，让给类属性初始化时间
-      setTimeout(() => {
-        const self = this as any;
-        self.onInit && self.onInit();
-      });
     }
   };
 }

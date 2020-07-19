@@ -12,6 +12,11 @@ const EXCLUDE_KEYS = ['state', 'refs', 'props', 'context', 'updater', '_reactInt
 const ARRAY_INFLUENTIAL_METHODS = ['push', 'pop', 'unshift', 'shift', 'slice', 'reverse', 'fill', 'copyWithin', 'sort'];
 
 /**
+ * 默认内部方法
+ */
+export const DEFAULT_INNER_METHODS = ['render', 'afterViewInit', 'onChanges', 'onCatch', 'onDestroy'];
+
+/**
  * 当注入时触发的方法定义
  */
 export type OnSet = (key?: PropertyKey, oldValue?: any, newValue?: any) => void;
@@ -20,10 +25,6 @@ export type OnSet = (key?: PropertyKey, oldValue?: any, newValue?: any) => void;
 /**
  * 代理 Hooks
  */
-export interface ProxyOnInit {
-  onInit(): any;
-}
-
 export interface ProxyAfterViewInit {
   afterViewInit(): any;
 }
@@ -48,7 +49,7 @@ export class ProxyFactory {
   private static pagesMap: { [key: string]: Component & {_isMounted: boolean} } = {};
 
   private static setPage(page: any) {
-    this.pagesMap[page.props.tid] = page;
+    this.pagesMap[page.props.tid.split('?')[0]] = page;
   }
 
   /**
@@ -58,8 +59,10 @@ export class ProxyFactory {
     const pages = Taro.getCurrentPages();
     const lastPage = pages[pages.length - 1];
     const targetPage = this.pagesMap[lastPage.route];
-    if (targetPage._isMounted) {
-      this.pagesMap[lastPage.route].forceUpdate();
+    if (targetPage) {
+      targetPage.forceUpdate();
+    } else {
+      setTimeout(() => this.notify(), 1000);
     }
   }
 
@@ -69,15 +72,14 @@ export class ProxyFactory {
    */
   static createComponentProxy(component: any) {
     const proxy = new Proxy(component, new ObjectProxy(() => this.notify()));
+    const methods = component.constructor.decorator ? component.constructor.decorator.methods : DEFAULT_INNER_METHODS;
 
     // 重新绑定方法的 this
-    if (component.constructor.decorator) {
-      component.constructor.decorator.methods.forEach(method => {
-        if (component[method]) {
-          component[method] = component[method].bind(proxy);
-        }
-      });
-    }
+    methods.forEach(method => {
+      if (component[method]) {
+        component[method] = component[method].bind(proxy);
+      }
+    });
 
     proxyMethod(component, 'componentDidMount', () => {
       component._isMounted = true;
@@ -130,7 +132,7 @@ export class ObjectProxy implements ProxyHandler<any> {
   }
 
   set(target: any, key: PropertyKey, newValue: any, _receiver: any): boolean {
-    if (newValue === null || newValue == undefined) return true;
+    if (newValue !== 0 && (newValue === null || newValue == undefined)) return true;
 
     const oldValue = target[key];
     target[key] = boundObjectProxy(newValue, this.onSet);
