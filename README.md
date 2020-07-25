@@ -96,7 +96,7 @@ export default class IndexPage extends Stateful.Page {
 
 4. 如果你在项目中使用了我，就可以把其他所有的状态管理包都删掉了哦
 
-5. 'render', 'onInit', 'afterViewInit', 'onChanges', 'onCatch', 'onDestroy' 这几个方法可以不用 `Stateful.bind()`，因为我已经绑定过了。
+5. 'render', 'afterViewInit', 'onChanges', 'onCatch', 'onDestroy' 这几个方法可以不用 `Stateful.bind()`，因为我已经绑定过了。
 
 ## 谁创造了我？
 
