@@ -11,6 +11,9 @@
     "@types/node": "^13.13.14",
     "typescript": "^3.9.6"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Eusen/taro-extras"
